@@ -12,7 +12,7 @@ if [ -z $IMAGE_LIST ]; then
 fi
 
 echo "clearing......"
-docker rmi -f $(IMAGE_LIST)
+docker rmi -f $IMAGE_LIST
 echo "done!"
 
 
