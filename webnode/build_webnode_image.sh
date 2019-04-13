@@ -21,7 +21,7 @@ else
 	echo "skip, download python..."
 fi
 
-docker build -t $REPO_NAME:$REPO_TAG .
+docker build  -m 2G --memory-swap -1 -t $REPO_NAME:$REPO_TAG .
 
 
 
