@@ -1,13 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
 ###  Brief:   Build a docker image
 ###  Author:  barry.paneer@qq.com
 ###  Date:    2019/04/12
 
+
 ### Configuration ################################
-PYTHON_PKG_NAME=Python-3.5.7.tgz
-REPO_NAME=netquake/webnode
-REPO_TAG=v1.0.1
+source base.sh
 
 ##################################################
 
@@ -21,7 +20,7 @@ else
 	echo "skip, download python..."
 fi
 
-docker build  -m 2G --memory-swap -1 -t $REPO_NAME:$REPO_TAG .
+docker build -m 2G --memory-swap -1 -t $LAST_IMAGE_NAME .
 
 
 

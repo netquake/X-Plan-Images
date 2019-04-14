@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ###  Brief:   Clear the contains' list
 ###  Author:  barry.paneer@qq.com

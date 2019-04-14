@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ###  Brief:   Clear all the images in local repository
 ###  Author:  barry.paneer@qq.com
