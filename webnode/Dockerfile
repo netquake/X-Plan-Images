@@ -17,6 +17,7 @@ RUN mkdir -p ./tmp
 ### Copy
 ADD Python-3.5.7.tgz ./tmp
 ADD requirements.txt ./tmp/Python-3.5.7/
+ADD nginx-1.14.2.tar.gz ./tmp
 
 ### Install
 # Tools
@@ -31,9 +32,15 @@ RUN make all && make install
 RUN ln -s /usr/local/bin/python3 /usr/bin/python3
 RUN pip3 install -r ./requirements.txt
 
+# Nginx
+WORKDIR ../openssl-fips-2.0.16
+RUN ./config && make && make install
+WORKDIR ../nginx-1.14.2
+RUN ./configure && make && make install
+
 ### Specify running user
-#RUN groupadd -r docker && useradd -r -g docker docker
-#USER docker
+RUN groupadd -r docker && useradd -r -g docker docker
+USER docker
 
 ### Expose port
 EXPOSE 80/tcp 22/tcp
