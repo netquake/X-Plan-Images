@@ -1,0 +1,17 @@
+[Unit]
+Description=a service ctl script of nginx (/lib/systemd/system/)
+Documentation=http://nginx.org/en/docs
+After=network.target nss-lookup.target
+ 
+[Service]
+Type=forking
+PIDFile=/var/run/nginx.pid
+ExecStart=/usr/sbin/nginx -c /conf/nginx.conf
+ExecReload=/usr/sbin/nginx -s reload
+ExecStop=/usr/sbin/nginx -s quit
+PrivateTmp=true
+#EnvironmentFile=/etc/sysconfig/rdisc
+#ExecStart=/sbin/rdisc $RDISCOPTS
+ 
+[Install]
+WantedBy=multi-user.target
