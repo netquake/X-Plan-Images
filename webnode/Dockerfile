@@ -13,9 +13,8 @@ FROM centos:centos7
 LABEL maintainer="barry<barry.paneer@qq.com>"
 
 # Specify folder which loaded from host
-VOLUME ["conf/"]
-# Configuration env. vars
-ENV NODE_NAME=web ENV_HOME=/
+RUN mkdir /root/web.conf
+ADD conf/nginx.conf /root/web.conf
 
 ######### Copy && install ################################
 RUN mkdir -p ./tmp
@@ -23,7 +22,6 @@ RUN mkdir -p ./tmp
 ADD Python-3.5.7.tgz ./tmp
 ADD requirements.txt ./tmp/Python-3.5.7/
 ADD nginx-1.14.2.tar.gz ./tmp
-ADD nginx.service /usr/lib/systemd/user/
 
 ### Install
 # Tools
@@ -41,8 +39,10 @@ RUN pip3 install -r ./requirements.txt
 # Nginx
 WORKDIR ../nginx-1.14.2
 RUN ./configure --prefix=/usr && make && make install
-RUN chmod +x /usr/lib/systemd/user/nginx.service
-CMD systemctl enable nginx.service
+
+### Start service
+WORKDIR /root/
+CMD nginx -c /root/web.conf/nginx.conf
 
 ### Specify running user
 #RUN groupadd -r docker && useradd -r -g docker docker
